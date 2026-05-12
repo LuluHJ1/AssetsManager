@@ -1,6 +1,8 @@
 package org.example;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -12,5 +14,22 @@ public class Main {
 
         Vehicle myVehicle = new Vehicle("Car","5-10-2026", new BigDecimal(5_000));
         Vehicle car2 = new Vehicle("2nd Car","5-9-2026",new BigDecimal(3_000));
+
+        List<Assets> assets = new ArrayList<>();
+
+        assets.add(myHouse);
+        assets.add(beachHouse);
+        assets.add(myVehicle);
+        assets.add(car2);
+
+        for(Assets property : assets){
+            if(property instanceof House){
+                House house = (House) property;
+                System.out.println("House at " + house.getAddress());
+            }
+            else if(property instanceof Vehicle){
+                System.out.println("Vehicle: " + myVehicle.getDateAcquired() + " " + myVehicle.getMakeModel());
+            }
+        }
     }
 }
