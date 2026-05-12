@@ -12,8 +12,8 @@ public class Main {
         House beachHouse = new House("Beach House","5-13-2026", new BigDecimal(20_000),
                 "456 Street", 4, 20_000, 20_000);
 
-        Vehicle myVehicle = new Vehicle("Car","5-10-2026", new BigDecimal(5_000));
-        Vehicle car2 = new Vehicle("2nd Car","5-9-2026",new BigDecimal(3_000));
+        Vehicle myVehicle = new Vehicle("Car","5-10-2026", new BigDecimal(5_000), "Ford Explorer", 3, 1000);
+        Vehicle car2 = new Vehicle("2nd Car","5-9-2026",new BigDecimal(3_000),"Honda Civic",4,20_000);
 
         List<Assets> assets = new ArrayList<>();
 
@@ -23,13 +23,17 @@ public class Main {
         assets.add(car2);
 
         for(Assets property : assets){
+            String message = "";
+
             if(property instanceof House){
                 House house = (House) property;
-                System.out.println("House at " + house.getAddress());
+                message = "House at " + house.getAddress();
             }
             else if(property instanceof Vehicle){
-                System.out.println("Vehicle: " + myVehicle.getDateAcquired() + " " + myVehicle.getMakeModel());
+                Vehicle vehicle = (Vehicle) property;
+                message = "Vehicle: " + vehicle.getYear() + " " + myVehicle.getMakeModel();
             }
+            System.out.println(message);
         }
     }
 }

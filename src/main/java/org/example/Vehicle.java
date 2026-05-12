@@ -1,8 +1,7 @@
 package org.example;
 
 import java.math.BigDecimal;
-
-
+import java.time.LocalDate;
 
 
 public class Vehicle extends Assets{
@@ -44,6 +43,30 @@ public class Vehicle extends Assets{
     }
     @Override
     public BigDecimal getValue(){
+        int currentYear = LocalDate.now().getYear();
+        int age = currentYear - year;
 
+        BigDecimal value;
+
+        if(age <= 3){
+
+            value = getOriginalCost().subtract(getOriginalCost()
+                    .multiply(new BigDecimal("0.03")).multiply(new BigDecimal(age)));
+        }
+        else if(age <= 6){
+            value = getOriginalCost().subtract(getOriginalCost()
+                    .multiply(new BigDecimal("0.06")).multiply(new BigDecimal(age)));
+        }
+        else if(age <= 10){
+            value = getOriginalCost().subtract(getOriginalCost()
+                    .multiply(new BigDecimal("0.08")).multiply(new BigDecimal(age)));
+        }
+        else{
+            value = new BigDecimal("1000");
+        }
+        if(odometer > 100_000 && !makeModel.contains("Honda") && !makeModel.contains("Toyota")){
+            value = value.multiply(new BigDecimal("0.75"));
+        }
+        return value;
     }
 }
