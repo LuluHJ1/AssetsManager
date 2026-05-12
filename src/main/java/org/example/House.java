@@ -4,12 +4,12 @@ import java.math.BigDecimal;
 
 public class House extends Assets {
     private String address;
-    private String condition;
+    private int condition;
     private int squareFoot;
     private int lotSize;
 
     public House(String description, String dateAcquired, BigDecimal originalCost, String address,
-                 String condition, int squareFoot, int lotSize) {
+                 int condition, int squareFoot, int lotSize) {
         super(description, dateAcquired, originalCost);
         this.address = address;
         this.condition = condition;
@@ -25,11 +25,11 @@ public class House extends Assets {
         this.address = address;
     }
 
-    public String getCondition() {
+    public int getCondition() {
         return condition;
     }
 
-    public void setCondition(String condition) {
+    public void setCondition(int condition) {
         this.condition = condition;
     }
 
@@ -48,5 +48,25 @@ public class House extends Assets {
     public void setLotSize(int lotSize) {
         this.lotSize = lotSize;
     }
+    @Override
+    public BigDecimal getValue(){
+        BigDecimal pricePerFoot = BigDecimal.ZERO;
 
+        if(condition == 1){
+            pricePerFoot = new BigDecimal(180);
+        }
+        else if(condition == 2){
+            pricePerFoot = new BigDecimal(130);
+        }
+        else if(condition == 3){
+            pricePerFoot = new BigDecimal(90);
+        }
+        else if(condition == 4){
+            pricePerFoot = new BigDecimal(80);
+        }
+        BigDecimal houseValue = pricePerFoot.multiply(new BigDecimal(squareFoot));
+
+        BigDecimal lotValue = new BigDecimal("0.25").multiply(new BigDecimal(lotSize));
+     return houseValue.add(lotValue);
+    }
 }
