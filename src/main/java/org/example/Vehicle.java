@@ -1,6 +1,7 @@
 package org.example;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 
 
@@ -62,11 +63,13 @@ public class Vehicle extends Assets{
                     .multiply(new BigDecimal("0.08")).multiply(new BigDecimal(age)));
         }
         else{
-            value = new BigDecimal("1000");
+            value = new BigDecimal("1000.00");
         }
+
+        String model= makeModel.toLowerCase();
         if(odometer > 100_000 && !makeModel.contains("Honda") && !makeModel.contains("Toyota")){
             value = value.multiply(new BigDecimal("0.75"));
         }
-        return value;
+        return value.setScale(2, RoundingMode.HALF_UP);
     }
 }
